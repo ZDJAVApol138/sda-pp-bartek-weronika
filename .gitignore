@@ -1,0 +1,5 @@
+target
+.idea
+test.txt
+*.iml
+*.DS_Store
