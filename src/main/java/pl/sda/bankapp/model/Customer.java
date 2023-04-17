@@ -11,19 +11,36 @@ public class Customer {
     private long id;
     private int age;
     private Address address;
-
     private ArrayList<Account> accounts;
 
-    public void addAccount(Account account){
+    public Customer(String name, String surname, String pesel, String email, long id, int age, Address address, String phone) {
+        this.name = name;
+        this.surname = surname;
+        this.pesel = pesel;
+        this.email = email;
+        this.id = id;
+        this.age = age;
+        this.address = address;
+        this.phone = phone;
+        this.accounts = new ArrayList<>();
+    }
+
+    public void addAccount(Account account) {
         accounts.add(account);
     }
 
-    public void deleteAccount(Account account){
-    accounts.remove(account);
+    public void deleteAccount(Account account) {
+        accounts.remove(account);
     }
 
-    public void listAccount(){
-        System.out.println(accounts);
+    public void listAccount() {
+       // System.out.println(accounts);
+
+        for (Account account : accounts
+             ) {
+            System.out.println(account.toString());
+
+        }
     }
 
     @Override
@@ -51,16 +68,6 @@ public class Customer {
         return Objects.hash(name, surname, pesel, email, id, age, address, phone);
     }
 
-    public Customer(String name, String surname, String pesel, String email, long id, int age, Address address, String phone) {
-        this.name = name;
-        this.surname = surname;
-        this.pesel = pesel;
-        this.email = email;
-        this.id = id;
-        this.age = age;
-        this.address = address;
-        this.phone = phone;
-    }
 
     public String getName() {
         return name;

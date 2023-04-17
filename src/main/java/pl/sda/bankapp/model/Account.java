@@ -28,6 +28,18 @@ public abstract class Account {
         this.currentAmount = currentAmount;
     }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", customerId=" + customerId +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", accountType=" + accountType +
+                ", currency=" + currency +
+                ", currentAmount=" + currentAmount +
+                '}';
+    }
+
     private void deposit(BigDecimal depositValue) {
         currentAmount = currentAmount.add(depositValue);
     }
