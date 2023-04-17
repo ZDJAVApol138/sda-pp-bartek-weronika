@@ -34,10 +34,8 @@ public class Customer {
     }
 
     public void listAccount() {
-       // System.out.println(accounts);
-
         for (Account account : accounts
-             ) {
+        ) {
             System.out.println(account.toString());
 
         }
