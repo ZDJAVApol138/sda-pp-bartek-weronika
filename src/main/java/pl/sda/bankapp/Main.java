@@ -18,7 +18,7 @@ public class Main {
         System.out.println(address1.toString());
 
         Customer customer1 = new Customer("Alicja","Artemska","1111111111","aa@aa.aa",1,11,address1,"111111");
-        StandardAccount acc1 = new StandardAccount(123,1234,"12345", Currency.EUR, BigDecimal.ZERO);
+        StandardAccount acc1 = new StandardAccount(123,1234, Currency.EUR);
 
         System.out.println(customer1.toString());
     }
