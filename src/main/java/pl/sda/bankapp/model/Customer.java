@@ -25,12 +25,12 @@ public class Customer {
         this.accounts = new ArrayList<>();
     }
 
-    public void addAccount(Account account) {
-        accounts.add(account);
+    public boolean addAccount(Account account) {
+        return accounts.add(account);
     }
 
-    public void deleteAccount(Account account) {
-        accounts.remove(account);
+    public boolean deleteAccount(Account account) {
+        return accounts.remove(account);
     }
 
     public void listAccount() {
