@@ -1,5 +1,6 @@
 package pl.sda.bankapp.model;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Customer {
@@ -10,6 +11,20 @@ public class Customer {
     private long id;
     private int age;
     private Address address;
+
+    private ArrayList<Account> accounts;
+
+    public void addAccount(Account account){
+        accounts.add(account);
+    }
+
+    public void deleteAccount(Account account){
+    accounts.remove(account);
+    }
+
+    public void listAccount(){
+        System.out.println(accounts);
+    }
 
     @Override
     public String toString() {
