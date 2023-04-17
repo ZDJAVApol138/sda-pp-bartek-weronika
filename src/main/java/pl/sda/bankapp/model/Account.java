@@ -13,9 +13,9 @@ public class Account {
     private String accountNumber;
     private AccountType accountType;
     private Currency currency;
-    private BigDecimal currentAmount = BigDecimal.ZERO ;
+    private BigDecimal currentAmount = BigDecimal.ZERO;
 
-    public Account(){
+    public Account() {
 
     }
 
@@ -26,6 +26,18 @@ public class Account {
         this.accountType = accountType;
         this.currency = currency;
         this.currentAmount = currentAmount;
+    }
+
+    private void deposit(BigDecimal depositValue) {
+        currentAmount = currentAmount.add(depositValue);
+    }
+
+    private void withdraw(BigDecimal withdrawValue) {
+        currentAmount = currentAmount.subtract(withdrawValue);
+    }
+
+    private void chargeAccount() {
+
     }
 
     public long getId() {
