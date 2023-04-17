@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 
 public class SavingAccount extends Account {
 
+    private  BigDecimal interestRate;
+
     public SavingAccount(long id, long customerId, String accountNumber, Currency currency, BigDecimal currentAmount) {
         super(id, customerId, accountNumber, AccountType.SAVING, currency, currentAmount);
     }
@@ -17,4 +19,21 @@ public class SavingAccount extends Account {
     public void chargeAccount(BigDecimal monthlyChargeRate) {
         setCurrentAmount(getCurrentAmount().subtract(monthlyChargeRate));
     }
+    public void addInterest(){
+        BigDecimal interest  = calculateInterest();
+        BigDecimal total = getCurrentAmount().add(interest);
+        setCurrentAmount(total);
+    }
+    private BigDecimal calculateInterest() {
+        return getCurrentAmount().multiply(interestRate);
+    }
+
+    public BigDecimal getInterestRate() {
+        return interestRate;
+    }
+
+    public void setInterestRate(BigDecimal interestRate) {
+        this.interestRate = interestRate;
+    }
+
 }
