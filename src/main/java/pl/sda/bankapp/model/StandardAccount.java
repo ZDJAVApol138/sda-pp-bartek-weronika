@@ -13,7 +13,8 @@ public class StandardAccount extends Account{
 
     BigDecimal monthlyChargeRate = BigDecimal.valueOf(5);
 
-    private void chargeAccount(BigDecimal monthlyChargeRate) {
-        getCurrentAmount().subtract(monthlyChargeRate);
+   @Override
+    public void chargeAccount(BigDecimal monthlyChargeRate) {
+       setCurrentAmount(getCurrentAmount().subtract(monthlyChargeRate));
     }
 }
