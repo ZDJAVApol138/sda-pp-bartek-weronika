@@ -2,6 +2,7 @@ package pl.sda.bankapp.model;
 
 import pl.sda.bankapp.enums.AccountType;
 import pl.sda.bankapp.enums.Currency;
+import pl.sda.bankapp.utils.AccountNumberGenerator;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -10,35 +11,32 @@ public abstract class Account {
 
     private long id;
     private long customerId;
-    private String accountNumber;
-    private AccountType accountType;
     private Currency currency;
+    private AccountType accountType;
     private BigDecimal currentAmount = BigDecimal.ZERO;
+    private final String accountNumber = AccountNumberGenerator.generate();
 
     public Account() {
-
     }
 
-    public Account(long id, long customerId, String accountNumber, AccountType accountType, Currency currency, BigDecimal currentAmount) {
+    public Account(long id, long customerId, Currency currency, AccountType accountType) {
         this.id = id;
         this.customerId = customerId;
-        this.accountNumber = accountNumber;
-        this.accountType = accountType;
         this.currency = currency;
-        this.currentAmount = currentAmount;
+        this.accountType = accountType;
     }
 
-    private void deposit(BigDecimal depositValue) {
-        currentAmount = currentAmount.add(depositValue);
+    public abstract void chargeAccount();
+
+    public void deposit(BigDecimal depositAmount) {
+        currentAmount = currentAmount.add(depositAmount);
     }
 
-    private void withdraw(BigDecimal withdrawValue) {
-        if (currentAmount.compareTo(withdrawValue) >= 0) {
-            currentAmount = currentAmount.subtract(withdrawValue);
+    public void withdraw(BigDecimal withdrawAmount) {
+        if (currentAmount.compareTo(withdrawAmount) >= 0) {
+            currentAmount = currentAmount.subtract(withdrawAmount);
         }
     }
-
-    public abstract void chargeAccount(BigDecimal chargeRate);
 
     public long getId() {
         return id;
@@ -60,18 +58,6 @@ public abstract class Account {
         return accountNumber;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public AccountType getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
-    }
-
     public Currency getCurrency() {
         return currency;
     }
@@ -88,16 +74,42 @@ public abstract class Account {
         this.currentAmount = currentAmount;
     }
 
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Account account = (Account) o;
-        return id == account.id && customerId == account.customerId && accountNumber.equals(account.accountNumber) && accountType == account.accountType && currency == account.currency && currentAmount.equals(account.currentAmount);
+        return id == account.id &&
+                customerId == account.customerId &&
+                Objects.equals(accountNumber, account.accountNumber) &&
+                currency == account.currency &&
+                Objects.equals(currentAmount, account.currentAmount) &&
+                accountType == account.accountType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customerId, accountNumber, accountType, currency, currentAmount);
+        return Objects.hash(id, customerId, accountNumber, currency,
+                currentAmount, accountType);
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", customerId=" + customerId +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", currency=" + currency +
+                ", currentAmount=" + currentAmount +
+                ", accountType=" + accountType +
+                '}';
     }
 }
