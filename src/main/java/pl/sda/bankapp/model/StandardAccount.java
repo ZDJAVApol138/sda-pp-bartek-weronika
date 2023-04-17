@@ -5,16 +5,16 @@ import pl.sda.bankapp.enums.Currency;
 
 import java.math.BigDecimal;
 
-public class StandardAccount extends Account{
+public class StandardAccount extends Account {
 
-   public StandardAccount(long id, long customerId, String accountNumber, Currency currency, BigDecimal currentAmount) {
-       super(id, customerId, accountNumber, AccountType.STANDARD, currency, currentAmount);
-   }
+    private static final int MONTHLY_FEE = 5;
 
-    BigDecimal monthlyChargeRate = BigDecimal.valueOf(5);
+    public StandardAccount(long id, long customerId, Currency currency) {
+        super(id, customerId, currency, AccountType.STANDARD);
+    }
 
-   @Override
-    public void chargeAccount(BigDecimal monthlyChargeRate) {
-       setCurrentAmount(getCurrentAmount().subtract(monthlyChargeRate));
+    @Override
+    public void chargeAccount() {
+        setCurrentAmount(getCurrentAmount().subtract(BigDecimal.valueOf(MONTHLY_FEE)));
     }
 }
