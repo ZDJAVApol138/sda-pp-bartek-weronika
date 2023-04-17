@@ -1,5 +1,6 @@
 package pl.sda.bankapp.model;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Customer {
@@ -10,6 +11,35 @@ public class Customer {
     private long id;
     private int age;
     private Address address;
+    private ArrayList<Account> accounts;
+
+    public Customer(String name, String surname, String pesel, String email, long id, int age, Address address, String phone) {
+        this.name = name;
+        this.surname = surname;
+        this.pesel = pesel;
+        this.email = email;
+        this.id = id;
+        this.age = age;
+        this.address = address;
+        this.phone = phone;
+        this.accounts = new ArrayList<>();
+    }
+
+    public boolean addAccount(Account account) {
+        return accounts.add(account);
+    }
+
+    public boolean deleteAccount(Account account) {
+        return accounts.remove(account);
+    }
+
+    public void listAccount() {
+        for (Account account : accounts
+        ) {
+            System.out.println(account.toString());
+
+        }
+    }
 
     @Override
     public String toString() {
@@ -36,16 +66,6 @@ public class Customer {
         return Objects.hash(name, surname, pesel, email, id, age, address, phone);
     }
 
-    public Customer(String name, String surname, String pesel, String email, long id, int age, Address address, String phone) {
-        this.name = name;
-        this.surname = surname;
-        this.pesel = pesel;
-        this.email = email;
-        this.id = id;
-        this.age = age;
-        this.address = address;
-        this.phone = phone;
-    }
 
     public String getName() {
         return name;

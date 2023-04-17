@@ -30,6 +30,7 @@ public abstract class Account {
 
     public void deposit(BigDecimal depositAmount) {
         currentAmount = currentAmount.add(depositAmount);
+
     }
 
     public void withdraw(BigDecimal withdrawAmount) {
