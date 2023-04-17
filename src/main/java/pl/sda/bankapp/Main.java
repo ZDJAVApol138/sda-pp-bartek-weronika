@@ -1,7 +1,13 @@
 package pl.sda.bankapp;
 
+import pl.sda.bankapp.enums.AccountType;
+import pl.sda.bankapp.enums.Currency;
+import pl.sda.bankapp.model.Account;
 import pl.sda.bankapp.model.Address;
 import pl.sda.bankapp.model.Customer;
+import pl.sda.bankapp.model.StandardAccount;
+
+import java.math.BigDecimal;
 
 public class Main {
 
@@ -11,7 +17,8 @@ public class Main {
         Address address2 = new Address("Barcelona","Barcelońska","00-002");
         System.out.println(address1.toString());
 
-Customer customer1 = new Customer("Alicja","Artemska","1111111111","aa@aa.aa",1,11,address1,"111111");
+        Customer customer1 = new Customer("Alicja","Artemska","1111111111","aa@aa.aa",1,11,address1,"111111");
+        StandardAccount acc1 = new StandardAccount(123,1234,"12345", Currency.EUR, BigDecimal.ZERO);
 
         System.out.println(customer1.toString());
     }
