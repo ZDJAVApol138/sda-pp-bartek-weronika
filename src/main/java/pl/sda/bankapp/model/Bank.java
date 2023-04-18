@@ -1,25 +1,17 @@
 package pl.sda.bankapp.model;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.Optional;
 
+@Getter
+@RequiredArgsConstructor  //@AllArgsConstructor
 public class Bank {
 
     private final String name;
-    private final ArrayList<Customer> customers;
-
-    public Bank(String name, ArrayList<Customer> customers) {
-        this.name = name;
-        this.customers = new ArrayList<>();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public ArrayList<Customer> getCustomers() {
-        return customers;
-    }
+    private final ArrayList<Customer> customers = new ArrayList<>();
 
     public boolean addCustomer(Customer customer) {
         return customers.add(customer);
