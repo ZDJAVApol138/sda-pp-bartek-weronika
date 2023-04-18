@@ -9,14 +9,14 @@ import pl.sda.bankapp.utils.AccountNumberGenerator;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.UUID;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 public abstract class Account {
 
-    private long id;
-    private long customerId;
+    private final UUID id = UUID.randomUUID();
     private Currency currency;
     private AccountType accountType;
     private BigDecimal currentAmount = BigDecimal.ZERO;
@@ -25,9 +25,7 @@ public abstract class Account {
     public Account() {
     }
 
-    public Account(long id, long customerId, Currency currency, AccountType accountType) {
-        this.id = id;
-        this.customerId = customerId;
+    public Account(Currency currency, AccountType accountType) {
         this.currency = currency;
         this.accountType = accountType;
     }
@@ -49,7 +47,6 @@ public abstract class Account {
     public String toString() {
         return "Account{" +
                 "id=" + id +
-                ", customerId=" + customerId +
                 ", accountNumber='" + accountNumber + '\'' +
                 ", currency=" + currency +
                 ", currentAmount=" + currentAmount +

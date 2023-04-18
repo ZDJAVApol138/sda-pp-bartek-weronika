@@ -14,6 +14,8 @@ public class Bank {
     private final String name;
     private final ArrayList<Customer> customers = new ArrayList<>();
 
+
+
     public boolean addCustomer(Customer customer) {
         return customers.add(customer);
     }
