@@ -2,6 +2,7 @@ package pl.sda.bankapp.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import pl.sda.bankapp.exceptions.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -26,7 +27,7 @@ public class Bank {
         return customers.stream()
                 .filter(c -> c.getPesel().equals(pesel))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Customer not found."));
+                .orElseThrow(() -> new NotFoundException("Customer not found."));
     }
 
     public void listCustomer() {

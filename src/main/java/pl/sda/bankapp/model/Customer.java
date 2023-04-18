@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.sda.bankapp.exceptions.NotFoundException;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -44,7 +45,7 @@ public class Customer {
         return accounts.stream()
                 .filter(c -> c.getAccountNumber().equals(accountNumber))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Customer not found."));
+                .orElseThrow(() -> new NotFoundException("Customer not found."));
     }
 
     @Override
