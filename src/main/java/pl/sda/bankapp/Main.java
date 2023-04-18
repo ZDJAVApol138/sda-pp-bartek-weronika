@@ -16,8 +16,8 @@ public class Main {
 
 
         Customer customer1 = new Customer("Alicja", "Artemska", "1111111111", "aa@aa.aa", 1, 11, address1, "111111");
-        StandardAccount acc1 = new StandardAccount(123, 1234, "12345", Currency.EUR, BigDecimal.ZERO);
-        PremiumAccount acc2 = new PremiumAccount(456, 4321, "56541", Currency.EUR, BigDecimal.ZERO);
+        StandardAccount acc1 = new StandardAccount(123, 1234,  Currency.EUR);
+        PremiumAccount acc2 = new PremiumAccount(456, 4321,  Currency.EUR);
         customer1.addAccount(acc1);
         customer1.addAccount(acc2);
         customer1.listAccount();
