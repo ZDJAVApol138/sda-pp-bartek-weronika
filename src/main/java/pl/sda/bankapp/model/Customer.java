@@ -1,11 +1,10 @@
 package pl.sda.bankapp.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.sda.bankapp.exceptions.NotFoundException;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -16,14 +15,14 @@ import java.util.Objects;
 public class Customer {
     private String name;
     private String surname;
-    private String pesel;
-    private String email;
-
-    private long id;
-    private int age;
-    private Address address;
-    private final ArrayList<Account> accounts= new ArrayList<>();
     private String phone;
+    private String email;
+    private String pesel;
+    private Address address;
+    private LocalDate dateOfBirth;
+    private final ArrayList<Account> accounts= new ArrayList<>();
+    private final int age = Period.between(dateOfBirth, LocalDate.now()).getYears();
+
 
     public boolean addAccount(Account account) {
         return accounts.add(account);
@@ -47,19 +46,5 @@ public class Customer {
                 .findFirst()
                 .orElseThrow(() -> new NotFoundException("Customer not found."));
     }
-
-    @Override
-    public String toString() {
-        return " name=" + name +
-                "  surname=" + surname +
-                "  pesel=" + pesel +
-                "\n email=" + email +
-                " id=" + id +
-                "  age=" + age +
-                "\n" + address +
-                "\n phone=" + phone;
-    }
-
-
 
 }
