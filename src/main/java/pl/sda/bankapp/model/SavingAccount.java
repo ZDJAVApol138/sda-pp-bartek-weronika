@@ -11,9 +11,7 @@ public class SavingAccount extends Account {
 
     private static final int MONTHLY_FEE = 3;
 
-    @Getter
-    @Setter
-    private BigDecimal interestRate;
+
 
     public SavingAccount(long id, long customerId, Currency currency) {
         super(id, customerId, currency, AccountType.SAVING);
@@ -32,7 +30,7 @@ public class SavingAccount extends Account {
     }
 
     private BigDecimal calculateInterest() {
-        return getCurrentAmount().multiply(interestRate);
+        return getCurrentAmount().multiply(BigDecimal.valueOf(0.08));
     }
 
 }
