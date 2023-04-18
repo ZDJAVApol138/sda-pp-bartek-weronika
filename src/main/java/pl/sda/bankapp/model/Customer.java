@@ -40,6 +40,13 @@ public class Customer {
         }
     }
 
+    public Account getAccount(String accountNumber) {
+        return accounts.stream()
+                .filter(c -> c.getAccountNumber().equals(accountNumber))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Customer not found."));
+    }
+
     @Override
     public String toString() {
         return " name=" + name +
