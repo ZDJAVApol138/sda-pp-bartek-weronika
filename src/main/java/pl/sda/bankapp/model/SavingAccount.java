@@ -6,15 +6,15 @@ import pl.sda.bankapp.enums.AccountType;
 import pl.sda.bankapp.enums.Currency;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class SavingAccount extends Account {
 
     private static final int MONTHLY_FEE = 3;
 
 
-
-    public SavingAccount(long id, long customerId, Currency currency) {
-        super(id, customerId, currency, AccountType.SAVING);
+    public SavingAccount(Currency currency) {
+        super(currency, AccountType.SAVING);
     }
 
     @Override
