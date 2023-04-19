@@ -1,5 +1,8 @@
 package pl.sda.bankapp.service;
 
+import pl.sda.bankapp.enums.AccountType;
+import pl.sda.bankapp.enums.Currency;
+import pl.sda.bankapp.model.Account;
 import pl.sda.bankapp.model.Address;
 import pl.sda.bankapp.model.Bank;
 import pl.sda.bankapp.model.Customer;
@@ -7,6 +10,7 @@ import pl.sda.bankapp.model.Customer;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class BankService {
@@ -52,19 +56,60 @@ public class BankService {
 
         Address address = new Address(city, street, postCode);
 
-        Customer customer = new Customer(name,surname,phone,email,pesel,address,dateOfBirth);
+        Customer customer = new Customer(name, surname, phone, email, pesel, address, dateOfBirth);
         bank.addCustomer(customer);
+    }
+    public void listAccounts() {
+        String pesel = getString("Pesel:");
+        Customer customer =bank.findCustomer(pesel);
+        System.out.println("Accounts list: ");
+        customer.listAccount();
     }
 
     public void removeCustomerByPesel() {
-        String pesel = scanner.nextLine();
-        Customer customer = bank.findCustomer(pesel);
-        bank.getCustomers().remove(customer);
+        String pesel = getString("Pesel:");
+        boolean deleted = bank.deleteCustomer(pesel);
+        System.out.printf("Customer deleted: %s\n");
     }
 
     public void getCustomerByPesel() {
-        String pesel = scanner.nextLine();
+        String pesel = getString("Pesel:");
         Customer customer = bank.findCustomer(pesel);
-        bank.getCustomers().add(customer);
+        System.out.printf("Customer obtained: %s\n");
     }
+
+    public void removeCustomerAccount(){
+        String pesel = getString("Pesel:");
+        Customer customer = bank.findCustomer(pesel);
+
+        String accountNumber = getString("Account number:");
+
+        Account accountToRemove = customer.getAccount(accountNumber);
+
+        boolean removed = customer.deleteAccount(accountToRemove);
+        System.out.println("Account removed %s\n");
+    }
+
+
+    public void createCustomerAccount() {
+        String pesel = getString("Pesel:");
+        Customer customer = bank.findCustomer(pesel);
+
+        String message = "Currency: " + Arrays.toString(Currency.values());
+        String currencySt = getString(message).toUpperCase();
+
+        String accMessage = "Account Type: " + Arrays.toString(AccountType.values());
+        String accountTypeSt = getString(accMessage).toUpperCase();
+
+        Currency currency = Currency.valueOf(currencySt);
+        AccountType accountType = AccountType.valueOf(accountTypeSt);
+
+        Account account = accountFactory.createAccount(accountType, currency);
+
+        customer.addAccount(account);
+    }
+
+
+
+
 }
