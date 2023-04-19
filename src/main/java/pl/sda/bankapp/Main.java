@@ -13,6 +13,7 @@ public class Main {
     public static void main(String[] args) {
 
         Bank bank1 = new Bank("Alior");
+        Scanner scanner = new Scanner(System.in);
         BankService bankService = new BankService(bank1);
 
         String options = """
@@ -28,7 +29,8 @@ public class Main {
 
         String userInput;
         do {
-            userInput = bankService.scanner.nextLine();
+            System.out.println(options);
+            userInput = scanner.nextLine();
             switch (userInput) {
                 case "1" -> bankService.createCustomer();
                 case "2" -> bankService.removeCustomerByPesel();
@@ -37,6 +39,8 @@ public class Main {
                 case "5" -> bankService.createCustomerAccount();
                 case "6" -> bankService.removeCustomerAccount();
                 case "7" -> bankService.listAccounts();
+                case "8" -> System.out.println("Exited");
+                default -> System.out.println("Invalid input");
             }
 
         } while (!"8".equals(userInput));
