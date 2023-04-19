@@ -17,6 +17,7 @@ public class Main {
         BankService bankService = new BankService(bank1);
 
         String options = """
+                ====================
                 1 - Create customer
                 2 - Remove customer
                 3 - Find customer
@@ -25,6 +26,7 @@ public class Main {
                 6 - Delete Account
                 7 - List Accounts
                 8 - Exit
+                ====================
                 """;
 
         String userInput;

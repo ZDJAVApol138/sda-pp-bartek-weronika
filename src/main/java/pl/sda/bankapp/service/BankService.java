@@ -50,7 +50,7 @@ public class BankService {
         String street = getString("Street:");
         String postCode = getString("Postal Code:");
 
-        String dateOfBirthSt = getString("Date of birth (dd/mm/yyyy:");
+        String dateOfBirthSt = getString("Date of birth (dd/mm/yyyy):");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dateOfBirth = LocalDate.parse(dateOfBirthSt, formatter);
 
@@ -69,13 +69,13 @@ public class BankService {
     public void removeCustomerByPesel() {
         String pesel = getString("Pesel:");
         boolean deleted = bank.deleteCustomer(pesel);
-        System.out.printf("Customer deleted: %s\n");
+        System.out.printf("Customer deleted: %s\n",pesel);
     }
 
     public void getCustomerByPesel() {
         String pesel = getString("Pesel:");
         Customer customer = bank.findCustomer(pesel);
-        System.out.printf("Customer obtained: %s\n");
+        System.out.printf("Customer obtained: %s\n",customer);
     }
 
     public void removeCustomerAccount(){
@@ -87,7 +87,7 @@ public class BankService {
         Account accountToRemove = customer.getAccount(accountNumber);
 
         boolean removed = customer.deleteAccount(accountToRemove);
-        System.out.println("Account removed %s\n");
+        System.out.printf("Account removed %s\n",accountToRemove);
     }
 
 
