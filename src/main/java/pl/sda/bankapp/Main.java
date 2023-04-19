@@ -3,25 +3,47 @@ package pl.sda.bankapp;
 import pl.sda.bankapp.enums.AccountType;
 import pl.sda.bankapp.enums.Currency;
 import pl.sda.bankapp.model.*;
+import pl.sda.bankapp.service.BankService;
 
 import java.math.BigDecimal;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-//hashcode oraz equals
-        Address address1 = new Address("Amsterdam", "Amsterdamska", "00-001");
-        Address address2 = new Address("Barcelona", "Barcelońska", "00-002");
-        // System.out.println(address1.toString());
 
+        Bank bank1 = new Bank("Alior");
+        Scanner scanner = new Scanner(System.in);
+        BankService bankService = new BankService(bank1);
 
-        Customer customer1 = new Customer();
-        StandardAccount acc1 = new StandardAccount(Currency.EUR);
-        PremiumAccount acc2 = new PremiumAccount( Currency.EUR);
-        customer1.addAccount(acc1);
-        customer1.addAccount(acc2);
-        customer1.listAccount();
-        //System.out.println(customer1.toString());
+        String options = """
+                1 - Create customer
+                2 - Remove customer
+                3 - Find customer
+                4 - List customers
+                5 - Create Account
+                6 - Delete Account
+                7 - List Accounts
+                8 - Exit
+                """;
+
+        String userInput;
+        do {
+            System.out.println(options);
+            userInput = scanner.nextLine();
+            switch (userInput) {
+                case "1" -> bankService.createCustomer();
+                case "2" -> bankService.removeCustomerByPesel();
+                case "3" -> bankService.getCustomerByPesel();
+                case "4" -> bankService.listCustomers(bank1.getCustomers());
+                case "5" -> bankService.createCustomerAccount();
+                case "6" -> bankService.removeCustomerAccount();
+                case "7" -> bankService.listAccounts();
+                case "8" -> System.out.println("Exited");
+                default -> System.out.println("Invalid input");
+            }
+
+        } while (!"8".equals(userInput));
 
     }
 }
