@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Customer {
     private String name;
     private String surname;
@@ -21,7 +19,7 @@ public class Customer {
     private Address address;
     private LocalDate dateOfBirth;
     private final ArrayList<Account> accounts= new ArrayList<>();
-    private final int age = Period.between(dateOfBirth, LocalDate.now()).getYears();
+    private int age;
 
 
     public boolean addAccount(Account account) {
@@ -30,6 +28,18 @@ public class Customer {
 
     public boolean deleteAccount(Account account) {
         return accounts.remove(account);
+    }
+
+    public Customer(String name, String surname, String phone,
+                    String email, String pesel, Address address, LocalDate dateOfBirth) {
+        this.name = name;
+        this.surname = surname;
+        this.phone = phone;
+        this.email = email;
+        this.pesel = pesel;
+        this.address = address;
+        this.dateOfBirth = dateOfBirth;
+        this.age = Period.between(dateOfBirth, LocalDate.now()).getYears();
     }
 
     public void listAccount() {
