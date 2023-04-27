@@ -86,7 +86,7 @@ public class BankService {
 
         Account accountToRemove = customer.getAccount(accountNumber);
 
-        boolean removed = customer.deleteAccount(accountToRemove);
+        boolean removed = customer.removeAccount(accountToRemove);
         System.out.printf("Account removed %s\n",accountToRemove);
     }
 
