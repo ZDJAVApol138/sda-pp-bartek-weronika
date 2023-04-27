@@ -14,7 +14,7 @@ public class Main {
 
         Bank bank1 = new Bank("Alior");
         Scanner scanner = new Scanner(System.in);
-        BankService bankService = new BankService(bank1);
+        BankService bankService = new BankService(bank1,scanner);
 
         String options = """
                 ====================
@@ -37,7 +37,7 @@ public class Main {
                 case "1" -> bankService.createCustomer();
                 case "2" -> bankService.removeCustomerByPesel();
                 case "3" -> bankService.getCustomerByPesel();
-                case "4" -> bankService.listCustomers(bank1.getCustomers());
+                case "4" -> bankService.listCustomers();
                 case "5" -> bankService.createCustomerAccount();
                 case "6" -> bankService.removeCustomerAccount();
                 case "7" -> bankService.listAccounts();

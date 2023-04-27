@@ -1,5 +1,6 @@
 package pl.sda.bankapp.service;
 
+import lombok.RequiredArgsConstructor;
 import pl.sda.bankapp.enums.AccountType;
 import pl.sda.bankapp.enums.Currency;
 import pl.sda.bankapp.model.Account;
@@ -13,25 +14,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+@RequiredArgsConstructor
 public class BankService {
 
-    public final Scanner scanner;
     public final Bank bank;
-    public final AccountFactory accountFactory;
+    public final Scanner scanner;
+    public final AccountFactory accountFactory = new AccountFactory();
 
-    public BankService(Bank bank) {
-        this.scanner = new Scanner(System.in);
-        this.bank = bank;
-        this.accountFactory = new AccountFactory();
-    }
 
-    public void listCustomers(ArrayList<Customer> customers) {
+    public void listCustomers() {
         if (bank.getCustomers().size() == 0) {
             System.out.println("Customers list is empty!");
             return;
         }
         System.out.println("Customer list");
-        bank.listCustomer();
+        bank.listCustomers();
     }
 
     private String getString(String text) {
