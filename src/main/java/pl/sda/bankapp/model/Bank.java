@@ -2,9 +2,11 @@ package pl.sda.bankapp.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import pl.sda.bankapp.exceptions.NotFoundException;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Getter
@@ -12,7 +14,8 @@ import java.util.Optional;
 public class Bank {
 
     private final String name;
-    private final ArrayList<Customer> customers = new ArrayList<>();
+    @Setter
+    private List<Customer> customers = new ArrayList<>();
 
 
 
@@ -32,7 +35,7 @@ public class Bank {
                 .orElseThrow(() -> new NotFoundException("Customer not found."));
     }
 
-    public void listCustomer() {
+    public void listCustomers() {
         for (Customer customer : customers
         ) {
             System.out.println(customer.toString());
