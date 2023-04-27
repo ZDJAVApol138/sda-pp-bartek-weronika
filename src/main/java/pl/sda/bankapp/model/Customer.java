@@ -6,7 +6,6 @@ import pl.sda.bankapp.exceptions.NotFoundException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-import java.util.Objects;
 
 @Data
 @NoArgsConstructor
@@ -26,7 +25,7 @@ public class Customer {
         return accounts.add(account);
     }
 
-    public boolean deleteAccount(Account account) {
+    public boolean removeAccount(Account account) {
         return accounts.remove(account);
     }
 
