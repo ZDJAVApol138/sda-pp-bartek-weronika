@@ -1,29 +1,27 @@
 package pl.sda.bankapp.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import pl.sda.bankapp.enums.AccountType;
 import pl.sda.bankapp.enums.Currency;
+import pl.sda.bankapp.mapper.CSVMapper;
 import pl.sda.bankapp.utils.AccountNumberGenerator;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Account {
 
-    private final UUID id = UUID.randomUUID();
+    private UUID id = UUID.randomUUID();
     private Currency currency;
     private AccountType accountType;
     private BigDecimal currentAmount = BigDecimal.ZERO;
-    private final String accountNumber = AccountNumberGenerator.generate();
+    private String accountNumber = AccountNumberGenerator.generate();
 
-    public Account() {
-    }
 
     public Account(Currency currency, AccountType accountType) {
         this.currency = currency;
@@ -43,6 +41,13 @@ public abstract class Account {
         }
     }
 
+    public String toCsv(String customerId) {
+        return String.join(CSVMapper.DELIMITER, List.of(
+                        id.toString(), accountNumber, currency.name(), accountType.name(),
+                        currentAmount.toString(), customerId
+                )
+        );
+    }
     @Override
     public String toString() {
         return "Account{" +

@@ -2,13 +2,18 @@ package pl.sda.bankapp.model;
 
 import lombok.*;
 import pl.sda.bankapp.exceptions.NotFoundException;
+import pl.sda.bankapp.mapper.CSVMapper;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class Customer {
     private String name;
     private String surname;
@@ -17,9 +22,10 @@ public class Customer {
     private String pesel;
     private Address address;
     private LocalDate dateOfBirth;
-    private final ArrayList<Account> accounts= new ArrayList<>();
     private int age;
-
+    private UUID id = UUID.randomUUID();
+    @Builder.Default
+    private List<Account> accounts= new ArrayList<>();
 
     public boolean addAccount(Account account) {
         return accounts.add(account);
@@ -39,6 +45,7 @@ public class Customer {
         this.address = address;
         this.dateOfBirth = dateOfBirth;
         this.age = Period.between(dateOfBirth, LocalDate.now()).getYears();
+        this.accounts= new ArrayList<>();
     }
 
     public void listAccount() {
@@ -56,4 +63,10 @@ public class Customer {
                 .orElseThrow(() -> new NotFoundException("Customer not found."));
     }
 
+    public String toCsv() {
+        return String.join(CSVMapper.DELIMITER, List.of(
+                String.valueOf(id), name, surname, phone, email, pesel, String.valueOf(age), dateOfBirth.toString(),
+                address.getCity(), address.getStreet(), address.getPostCode())
+        );
+    }
 }

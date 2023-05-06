@@ -7,7 +7,9 @@ import pl.sda.bankapp.service.BankService;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
-
+import pl.sda.bankapp.dao.AccountsDAO;
+import pl.sda.bankapp.dao.CustomersDAO;
+import pl.sda.bankapp.dao.PersistenceContext;
 public class Main {
 
     public static void main(String[] args) {
@@ -16,16 +18,22 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         BankService bankService = new BankService(bank1,scanner);
 
+        AccountsDAO accountsDAO = new AccountsDAO();
+        CustomersDAO customersDAO = new CustomersDAO(accountsDAO);
+        PersistenceContext persistenceContext = new PersistenceContext(customersDAO);
+        persistenceContext.loadData(bank1);
+
         String options = """
                 ====================
-                1 - Create customer
+                1 - Create customer 
                 2 - Remove customer
                 3 - Find customer
                 4 - List customers
                 5 - Create Account
                 6 - Delete Account
                 7 - List Accounts
-                8 - Exit
+                8 - Save
+                9 - Exit
                 ====================
                 """;
 
@@ -41,11 +49,13 @@ public class Main {
                 case "5" -> bankService.createCustomerAccount();
                 case "6" -> bankService.removeCustomerAccount();
                 case "7" -> bankService.listAccounts();
-                case "8" -> System.out.println("Exited");
+                case "8" -> persistenceContext.persistData(bank1);
+                case "9" -> System.out.println("Exited");
                 default -> System.out.println("Invalid input");
             }
 
-        } while (!"8".equals(userInput));
+        } while (!"9".equals(userInput));
 
+        persistenceContext.persistData(bank1);
     }
 }

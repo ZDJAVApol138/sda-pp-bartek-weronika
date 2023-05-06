@@ -51,6 +51,7 @@ public class BankService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate dateOfBirth = LocalDate.parse(dateOfBirthSt, formatter);
 
+
         Address address = new Address(city, street, postCode);
 
         Customer customer = new Customer(name, surname, phone, email, pesel, address, dateOfBirth);
